@@ -46,14 +46,14 @@ export class App {
   }
 
   protected async sendPhotos(): Promise<void> {
-    if (!this.guestName().trim() || !this.photos().length) {
-      this.error.set('Add your name and at least one photo to continue.');
+    if (!this.photos().length) {
+      this.error.set('Kies asseblief ten minste een foto om voort te gaan.');
       return;
     }
 
     if (!this.uploadEndpoint) {
       this.error.set(
-        'The gallery is not connected yet. Add your Apps Script URL in src/app/app.ts.',
+        'Die galery is nog nie gekoppel nie. Voeg die Apps Script-URL in src/app/app.ts by.',
       );
       return;
     }
@@ -70,13 +70,13 @@ export class App {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ guestName: this.guestName().trim(), files }),
+        body: JSON.stringify({ files }),
       });
       this.sent.set(true);
       this.photos().forEach(({ preview }) => URL.revokeObjectURL(preview));
       this.photos.set([]);
     } catch {
-      this.error.set('Something went wrong while sending. Please try again.');
+      this.error.set('Iets het verkeerd geloop. Probeer asseblief weer.');
     } finally {
       this.isSending.set(false);
     }
@@ -93,7 +93,8 @@ export class App {
       .slice(0, available);
 
     if (!validFiles.length) {
-      this.error.set('Choose image files up to 12 MB each.');
+      this.error.set('Kies beeldlêers van hoogstens 12 MB elk.');
+        this.error.set('Kies beeldlêers van hoogstens 12 MB elk.');
       return;
     }
 
