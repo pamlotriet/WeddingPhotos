@@ -39,11 +39,12 @@
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1fr);
   gap: clamp(56px, 10vw, 150px);
-  align-items: center;
+  align-items: start;
   padding: 64px 0;
 }
 .welcome {
   max-width: 470px;
+  padding-top: 24px;
 }
 .eyebrow {
   color: #e0ad22;
@@ -83,9 +84,10 @@ h1 em {
   color: #52606d;
   display: flex;
   gap: 13px;
-  margin-top: 46px;
+  margin-top: 38px;
   padding-top: 15px;
   font-size: 11px;
+  width: min(370px, 100%);
 }
 .spark {
   color: #e0ad22;
