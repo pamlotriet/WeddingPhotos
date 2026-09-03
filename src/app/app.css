@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
 }
-.sunflower { color: #e0ad22; font-size: 42px; line-height: 1; position: absolute; right: clamp(24px, 7vw, 100px); top: 82px; transform: rotate(10deg); }
 .topbar,
 .footer {
   display: flex;
@@ -351,7 +350,6 @@ h2 {
     margin-bottom: 48px;
   }
   h1 { font-size: 60px; }
-  .sunflower { font-size: 32px; right: 22px; top: 72px; }
   .upload-panel {
     padding: 24px 20px;
   }
