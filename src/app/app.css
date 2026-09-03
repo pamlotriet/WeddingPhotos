@@ -179,15 +179,10 @@ h2 {
 }
 .upload-mark {
   align-items: center;
-  border: 1px solid #e0ad22;
-  border-radius: 50%;
-  color: #e0ad22;
   display: flex;
-  font-size: 22px;
-  height: 42px;
+  font-size: 34px;
   justify-content: center;
   margin-bottom: 13px;
-  width: 42px;
 }
 .drop-title {
   color: #102a43;

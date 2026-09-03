@@ -1,6 +1,6 @@
 <main class="page-shell">
   <header class="topbar">
-    <a class="wordmark" href="/" aria-label="Terug na die trougalery">G + AA</a>
+    <a class="wordmark" href="/" aria-label="Terug na die trougalery">G + A</a>
     <span class="date-mark">ons dag</span>
   </header>
   <div class="sunflower" aria-hidden="true">🌻</div>
@@ -37,7 +37,7 @@
         </div>
         <div class="drop-zone" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
           <input id="photo-picker" class="visually-hidden" type="file" accept="image/*" multiple (change)="selectFiles($event)" />
-          <label class="drop-content" for="photo-picker"><span class="upload-mark" aria-hidden="true">^</span><span class="drop-title">Sleep foto's hier</span><span class="drop-subtitle">of <u>kies uit jou kamerarol</u></span></label>
+          <label class="drop-content" for="photo-picker"><span class="upload-mark" aria-hidden="true">🌻</span><span class="drop-title">Sleep foto's hier</span><span class="drop-subtitle">of <u>kies uit jou kamerarol</u></span></label>
         </div>
         @if (photos().length) {
           <div class="preview-grid" aria-label="Gekose foto's">
