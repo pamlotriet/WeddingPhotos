@@ -79,7 +79,7 @@ h1 em {
   max-width: 370px;
 }
 .note-line {
-  align-items: baseline;
+  align-items: center;
   border-top: 1px solid rgba(24, 59, 60, 0.18);
   color: #52606d;
   display: flex;
