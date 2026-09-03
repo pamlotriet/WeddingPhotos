@@ -15,6 +15,10 @@ export class App {
   protected readonly guestName = signal('');
   protected readonly photos = signal<PhotoFile[]>([]);
   protected readonly isSending = signal(false);
+  protected readonly uploadProgress = signal(0);
+  protected readonly uploadTotal = signal(0);
+  protected readonly uploadPhotoProgress = signal(0);
+  protected readonly uploadPhotoTotal = signal(0);
   protected readonly sent = signal(false);
   protected readonly error = signal('');
 
@@ -60,17 +64,23 @@ export class App {
 
     this.isSending.set(true);
     this.error.set('');
+    this.uploadProgress.set(0);
+    this.uploadPhotoProgress.set(0);
+    this.uploadPhotoTotal.set(this.photos().length);
     try {
-      const files = await Promise.all(
-        this.photos().map(async ({ file }) => ({
-          ...(await this.prepareUpload(file)),
-        })),
-      );
+      const files: Array<{ name: string; type: string; data: string; bytes: number }> = [];
+      for (const { file } of this.photos()) {
+        const prepared = await this.prepareUpload(file);
+        files.push(prepared);
+        this.uploadProgress.update((current) => current + prepared.bytes);
+        this.uploadPhotoProgress.update((current) => current + 1);
+      }
+      this.uploadTotal.set(files.reduce((total, file) => total + file.bytes, 0));
       await fetch(this.uploadEndpoint, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ files }),
+        body: JSON.stringify({ files: files.map(({ bytes, ...file }) => file) }),
       });
       this.sent.set(true);
       this.photos().forEach(({ preview }) => URL.revokeObjectURL(preview));
@@ -115,7 +125,7 @@ export class App {
     });
   }
 
-  private async prepareUpload(file: File): Promise<{ name: string; type: string; data: string }> {
+  private async prepareUpload(file: File): Promise<{ name: string; type: string; data: string; bytes: number }> {
     const image = new Image();
     const objectUrl = URL.createObjectURL(file);
 
@@ -141,6 +151,7 @@ export class App {
           name: file.name.replace(/\.[^.]+$/, '') + '.jpg',
           type: 'image/jpeg',
           data: await this.toBase64(compressedBlob),
+          bytes: compressedBlob.size,
         };
       }
     } catch {
@@ -149,6 +160,6 @@ export class App {
       URL.revokeObjectURL(objectUrl);
     }
 
-    return { name: file.name, type: file.type, data: await this.toBase64(file) };
+    return { name: file.name, type: file.type, data: await this.toBase64(file), bytes: file.size };
   }
 }

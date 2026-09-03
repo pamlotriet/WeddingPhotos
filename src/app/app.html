@@ -3,6 +3,7 @@
     <a class="wordmark" href="/" aria-label="Terug na die trougalery">M + J</a>
     <span class="date-mark">07.06.26 <span aria-hidden="true">/</span> ons dag</span>
   </header>
+  <div class="sunflower" aria-hidden="true">🌻</div>
   <div class="content-grid">
     <section class="welcome" aria-labelledby="page-title">
       <p class="eyebrow">'n Klein stukkie van die dag</p>
@@ -11,6 +12,16 @@
       <div class="note-line"><span class="spark" aria-hidden="true">*</span><span>Dankie dat jy deel is van ons verhaal.</span></div>
     </section>
     <section class="upload-panel" aria-labelledby="upload-title">
+      @if (isSending()) {
+        <div class="upload-modal" role="status" aria-live="polite">
+          <div class="modal-flower" aria-hidden="true">🌻</div>
+          <p class="eyebrow">Een oomblik</p>
+          <h2>Jou foto's word gestuur</h2>
+          <p class="upload-detail">{{ uploadPhotoProgress() }} van {{ uploadPhotoTotal() }} foto's</p>
+          <div class="progress-track"><span [style.width.%]="uploadPhotoTotal() ? (uploadPhotoProgress() / uploadPhotoTotal()) * 100 : 0"></span></div>
+          <p class="upload-size">{{ (uploadProgress() / 1048576).toFixed(1) }} MB van {{ (uploadTotal() / 1048576).toFixed(1) }} MB voorberei</p>
+        </div>
+      }
       @if (sent()) {
         <div class="success-state">
           <div class="success-icon" aria-hidden="true">+</div>
