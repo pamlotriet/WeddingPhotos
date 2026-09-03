@@ -79,19 +79,24 @@ h1 em {
   max-width: 370px;
 }
 .note-line {
-  align-items: center;
+  align-items: baseline;
   border-top: 1px solid rgba(24, 59, 60, 0.18);
   color: #52606d;
   display: flex;
-  gap: 13px;
+  gap: 12px;
   margin-top: 38px;
   padding-top: 15px;
   font-size: 11px;
-  width: min(370px, 100%);
+  line-height: 1.5;
+  max-width: 370px;
+  width: 100%;
 }
 .spark {
+  flex: 0 0 12px;
   color: #e0ad22;
   font-size: 19px;
+  line-height: 1;
+  text-align: center;
 }
 .upload-panel {
   position: relative;
