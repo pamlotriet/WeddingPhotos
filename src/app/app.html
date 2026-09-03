@@ -15,7 +15,7 @@
       @if (isSending()) {
         <div class="upload-modal" role="status" aria-live="polite">
           <div class="modal-flower" aria-hidden="true">🌻</div>
-          <p class="eyebrow">Een oomblik</p>
+          <p class="eyebrow loading-label"><span class="loading-dots" aria-hidden="true"></span> Laai tans op</p>
           <h2>Jou foto's word gestuur</h2>
           <p class="upload-detail">{{ uploadPhotoProgress() }} van {{ uploadPhotoTotal() }} foto's</p>
           <div class="progress-track"><span [style.width.%]="uploadPhotoTotal() ? (uploadPhotoProgress() / uploadPhotoTotal()) * 100 : 0"></span></div>
