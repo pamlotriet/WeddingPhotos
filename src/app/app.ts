@@ -20,7 +20,7 @@ export class App {
 
   // Set this to the deployed Google Apps Script web app URL.
   private readonly uploadEndpoint =
-    'https://script.google.com/macros/s/AKfycbxcl3qKbETMZZ_ZFwpEkQ7bVFCHQ4CuPCbYnY7rISLwCY4_1HzvVy4QFHiSE2pd3IZm-Q/exec';
+    'https://script.google.com/macros/s/AKfycbylSbb5rAonA-ZTNdZZ4G4xw4PPCUOljfQD3CxKStWv-8F3-20PV1ro0mW03V8UE_iLKw/exec';
   protected readonly maxPhotos = 20;
   protected readonly maxFileSize = 12 * 1024 * 1024;
 
