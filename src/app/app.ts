@@ -63,9 +63,7 @@ export class App {
     try {
       const files = await Promise.all(
         this.photos().map(async ({ file }) => ({
-          name: file.name,
-          type: file.type,
-          data: await this.toBase64(file),
+          ...(await this.prepareUpload(file)),
         })),
       );
       await fetch(this.uploadEndpoint, {
@@ -107,12 +105,49 @@ export class App {
     this.error.set('');
   }
 
-  private toBase64(file: File): Promise<string> {
+  private toBase64(file: Blob): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(String(reader.result).split(',')[1]);
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
+  }
+
+  private async prepareUpload(file: File): Promise<{ name: string; type: string; data: string }> {
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    try {
+      await new Promise<void>((resolve, reject) => {
+        image.onload = () => resolve();
+        image.onerror = reject;
+        image.src = objectUrl;
+      });
+
+      const maxDimension = 2400;
+      const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      canvas.getContext('2d')?.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      const compressedBlob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob(resolve, 'image/jpeg', 0.82),
+      );
+      if (compressedBlob) {
+        return {
+          name: file.name.replace(/\.[^.]+$/, '') + '.jpg',
+          type: 'image/jpeg',
+          data: await this.toBase64(compressedBlob),
+        };
+      }
+    } catch {
+      // Some browsers cannot decode HEIC; send the original in that case.
+    } finally {
+      URL.revokeObjectURL(objectUrl);
+    }
+
+    return { name: file.name, type: file.type, data: await this.toBase64(file) };
   }
 }
