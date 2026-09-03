@@ -1,4 +1,4 @@
-const FOLDER_ID = '1CzdQMdU02vxnd8pY60eCOX3nhO8Fq-WG';
+const FOLDER_ID = '1F1-322IyNoCYuuL4e6roayC_b2Kmgla7';
 
 function doPost(request) {
   const payload = JSON.parse(request.postData.contents);
