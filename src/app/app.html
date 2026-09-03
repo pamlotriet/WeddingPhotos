@@ -1,7 +1,7 @@
 <main class="page-shell">
   <header class="topbar">
-    <a class="wordmark" href="/" aria-label="Terug na die trougalery">M + J</a>
-    <span class="date-mark">07.06.26 <span aria-hidden="true">/</span> ons dag</span>
+    <a class="wordmark" href="/" aria-label="Terug na die trougalery">G + AA</a>
+    <span class="date-mark">ons dag</span>
   </header>
   <div class="sunflower" aria-hidden="true">🌻</div>
   <div class="content-grid">
@@ -28,7 +28,7 @@
           <p class="eyebrow">Veilig gebêre</p>
           <h2>Baie dankie.</h2>
           <p>Jou foto's is veilig op pad na ons galery.</p>
-          <button class="text-button" type="button" (click)="sent.set(false)">Laai nog foto's op <span aria-hidden="true">-&gt;</span></button>
+          <button class="text-button" type="button" (click)="sent.set(false)">Laai nog foto's op</button>
         </div>
       } @else {
         <div class="panel-heading">
@@ -47,7 +47,7 @@
           </div>
         }
         @if (error()) { <p class="error-message" role="alert">{{ error() }}</p> }
-        <div class="panel-footer"><p class="limits">JPG, PNG of HEIC - hoogstens 12 MB elk</p><button class="send-button" type="button" [disabled]="isSending()" (click)="sendPhotos()">{{ isSending() ? 'Laai op...' : 'Stuur na die album' }} <span aria-hidden="true">-&gt;</span></button></div>
+        <div class="panel-footer"><p class="limits">JPG, PNG of HEIC - hoogstens 12 MB elk</p><button class="send-button" type="button" [disabled]="isSending()" (click)="sendPhotos()">{{ isSending() ? 'Laai op...' : 'Stuur na die album' }}</button></div>
       }
     </section>
   </div>
