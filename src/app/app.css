@@ -83,12 +83,13 @@ h1 em {
   border-top: 1px solid rgba(24, 59, 60, 0.18);
   color: #52606d;
   display: flex;
+  justify-content: center;
   gap: 12px;
   margin-top: 38px;
   padding-top: 15px;
   font-size: 11px;
   line-height: 1.5;
-  max-width: 370px;
+  max-width: 100%;
   width: 100%;
 }
 .spark {
